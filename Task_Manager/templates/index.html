@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <!-- Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Task List</h2>
+        <a href="/logout" class="btn btn-warning mb-3">Logout</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Task</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                    <tr>
+                        <td>{{ task.title }}</td>
+                        <td>
+                            <!-- Edit button -->
+                            <a href="/edit/{{ task.id }}" class="btn btn-primary btn-sm">Edit</a>
+                            <!-- Delete button -->
+                            <a href="/delete/{{ task.id }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Add Task Form -->
+        <form action="/add" method="post" class="form-inline">
+            <div class="form-group mb-2">
+                <label for="taskTitle" class="sr-only">Task</label>
+                <input type="text" class="form-control" id="taskTitle" name="title" placeholder="New task" required>
+            </div>
+            <button type="submit" class="btn btn-success mb-2">Add Task</button>
+        </form>
+    </div>
+    <!-- Bootstrap JS, Popper.js, and jQuery for interactivity and components -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
